@@ -100,14 +100,7 @@
     <!-- Custom styles for this template -->
     <link href="./assets/pricing.css" rel="stylesheet">
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () =>{
-          const token = localStorage.getItem('jwt')
-          if(!token){
-              window.location.href = 'login.html'
-          }
-      })
-  </script>
+
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -209,14 +202,11 @@
 </footer>
 </div>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="functions.js"></script>
+<script>      
+validateJWT();
+</script>
 <script>
-  document.getElementById("logout").addEventListener("click", myFunction);
-
-  function myFunction() {
-    console.log('click en logout')
-    localStorage.removeItem("jwt");
-    window.location.href = 'login.html'
-}
 
 async function getPosts() {
   const response = await fetch('http://localhost/BlogAPI/backend/api/index.php?action=getPosts');
@@ -240,13 +230,14 @@ getPosts().then(posts => {
                   <li>${posts[i].content.substring(0, 125)} </li>
                   <li>By ${posts[i].username}</li>
                 </ul>
-                <a href="#" class="w-100 btn btn-md btn-outline-primary">Read More</a>
+                <a href="post.html?id=${posts[i].id}" class="w-100 btn btn-md btn-outline-primary">Read More</a>
               </div>
             </div>
           </div>`
         }
         list.innerHTML = content
 });
+
 
 </script>
     </body>
